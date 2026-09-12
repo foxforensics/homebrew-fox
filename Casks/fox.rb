@@ -41,9 +41,9 @@ cask "fox" do
   manpage "fox-time.1"
   manpage "fox.1"
 
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/fox"]
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/fox"]
     end
   end
 
